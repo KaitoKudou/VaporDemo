@@ -1,0 +1,76 @@
+openapi: '3.1.0'
+info:
+  title: GreetingService
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1/openapi
+    description: Example service deployment.
+paths:
+  /image-with-chunks:
+    get:
+      operationId: getImageWithChunks
+      responses:
+        '200':
+          description: luffy image.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /image:
+    get:
+      operationId: getImage
+      responses:
+        '200':
+          description: luffy image.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /json:
+    get:
+      operationId: getJson
+      responses:
+        '200':
+          description: A JSON.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloVapor'
+  /greet:
+    get:
+      operationId: getGreeting
+      parameters:
+      - name: name
+        required: false
+        in: query
+        description: The name used in the returned greeting.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A success response with a greeting.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greeting'
+components:
+  schemas:
+    HelloVapor:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: string
+      required:
+        - message
+        - status
+    Greeting:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
