@@ -37,6 +37,10 @@ func routes(_ app: Application) throws {
         )
     }
     
+    app.get("openapi") { request async throws in
+        request.redirect(to: "/openapi.html", redirectType: .permanent)
+    }
+    
     try app.register(collection: MyController())
     
     try app.register(collection: HTTPBinController())
